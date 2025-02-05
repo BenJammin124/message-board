@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title[0] %></title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="message-board">
+      <h1>Ye Olde Message Board</h1>
+      <button class="new-message-btn">New Message</button>
+      <% messages.forEach(message => { %>
+      <div class="message">
+        <div class="left-message">
+          <div class="message-header"><%= message.user %></div>
+          <img src="<%= message.pic %>" alt="avatar.pic" />
+          <div class="message-date">
+            Posted at <%= message.added.toLocaleDateString("en-US", {}) %>
+          </div>
+        </div>
+        <div class="right-message">
+          <div class="message-text"><%= message.text %></div>
+          <a href="/<%= message.id %>">More Detes</a>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <script>
+      document
+        .querySelector(".new-message-btn")
+        .addEventListener("click", () => {
+          window.location.href = "/new";
+        });
+    </script>
+  </body>
+</html>
