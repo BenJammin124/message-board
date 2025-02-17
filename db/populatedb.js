@@ -9,6 +9,8 @@ const HOST = process.env.HOST;
 const DB = process.env.DB;
 const ROLE_PASSWORD = process.env.ROLE_PASSWORD;
 
+console.log("Connection string:", process.env.CONNECTION_STRING);
+
 const SQL = `
 CREATE TABLE IF NOT EXISTS messages (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -18,7 +20,7 @@ CREATE TABLE IF NOT EXISTS messages (
 
 );
 
-INSERT INTO messages (username) 
+INSERT INTO messages (user, text, added) 
 VALUES
   ('Bryan', 'Hi there!', '${formattedDate}'),
   ('Odin', 'HELLO WORLD!', '${formattedDate}'),
@@ -28,7 +30,8 @@ VALUES
 async function main() {
   console.log("seeding...");
   const client = new Client({
-    connectionString: process.env.CONNECTION_STRING,
+    connectionString:
+      "postgresql://db_k7r0_user:mc1BiOM9HuBmrblWsbxnq3I6enV9VyK8@dpg-cupqna5svqrc73f4vf9g-a.ohio-postgres.render.com/db_k7r0",
   });
   await client.connect();
   await client.query(SQL);
