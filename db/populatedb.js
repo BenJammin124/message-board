@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS messages (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   user VARCHAR ( 30 ),
   text VARCHAR ( 500 ),
-  added VARCHAR ( 30 ),
+  added VARCHAR ( 30 )
 
 );
 
@@ -28,7 +28,7 @@ VALUES
 async function main() {
   console.log("seeding...");
   const client = new Client({
-    connectionString: process.env.CONNECTING_STRING,
+    connectionString: process.env.CONNECTION_STRING,
   });
   await client.connect();
   await client.query(SQL);
