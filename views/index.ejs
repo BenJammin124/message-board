@@ -1,3 +1,4 @@
+<!-- ./views/index.ejs -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,10 +15,8 @@
       <div class="message">
         <div class="left-message">
           <div class="message-header"><%= message.user %></div>
-          <img src="<%= message.pic %>" alt="avatar.pic" />
-          <div class="message-date">
-            Posted at <%= message.added.toLocaleDateString("en-US", {}) %>
-          </div>
+
+          <div class="message-date">Posted at <%= message.added %></div>
         </div>
         <div class="right-message">
           <div class="message-text"><%= message.text %></div>

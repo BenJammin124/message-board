@@ -1,14 +1,14 @@
+//./routes/indexRouters.js
 const { Router } = require("express");
 const indexRouter = Router();
+const queries = require("../db/queries");
+
 const { getMessageById } = require("../controllers/messageController");
-const { messages } = require("../messageDB");
 
-let idNum = 2;
-
-indexRouter.get("/", (req, res) => {
+indexRouter.get("/", async (req, res) => {
   res.render("index", {
     title: ["Mini Message Board", "New Message"],
-    messages: messages,
+    messages: await queries.getAllMessages(),
   });
 });
 
@@ -18,15 +18,11 @@ indexRouter.get("/new", (req, res) => {
 
 indexRouter.get("/:messageId", getMessageById);
 
-indexRouter.post("/new", (req, res) => {
-  console.log("message posted" + req.body.text);
-  idNum++;
-  messages.push({
-    text: req.body.text,
-    user: "@" + req.body.user,
-    added: new Date(),
-    id: idNum,
-    pic: "https://avatar.iran.liara.run/public",
+indexRouter.post("/new", async (req, res) => {
+  const newMessage = req.body;
+  await queries.insertMessage({
+    user: newMessage.user,
+    text: newMessage.text,
   });
   res.redirect("/");
 });
