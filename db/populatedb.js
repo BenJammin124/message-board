@@ -13,13 +13,13 @@ const databaseUrl = process.env.DATABASE_EURL;
 const SQL = `
 CREATE TABLE IF NOT EXISTS messages (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  "user" VARCHAR ( 30 ),
+  username VARCHAR ( 30 ),
   text VARCHAR ( 500 ),
   added VARCHAR ( 30 )
 
 );
 
-INSERT INTO messages ("user", text, added) 
+INSERT INTO messages (username, text, added) 
 VALUES
   ('Bryan', 'Hi there!', '${formattedDate}'),
   ('Odin', 'HELLO WORLD!', '${formattedDate}'),
@@ -31,7 +31,7 @@ async function main() {
   const client = new Client({
     connectionString: databaseUrl,
     ssl: {
-      rejectUnauthorized: false, // Set to false to allow self-signed certificates (common in cloud setups)
+      rejectUnauthorized: false,
     },
   });
 
